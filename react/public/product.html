@@ -6,8 +6,8 @@
     <title>Product Showcase</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        .back-button { padding: 10px; position: absolute; top: 10px; left: 10px; background-color: #0071dc; color: white; text-decoration: none; border-radius: 4px; z-index: 1000; }
-        .header { background-color: #0071dc; color: white; padding: 20px; text-align: center; }
+        .back-button {padding: 10px; position: absolute; top: 10px; left: 10px; background-color: #fffd97; color: white; text-decoration: none; border-radius: 4px; z-index: 1000; text-align: right;}
+        .header { background-color: #caddf0; color: white; padding: 20px; text-align: center; }
         .product-grid { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; background-color: #f4f4f4; }
         .product { background: white; margin: 10px; padding: 20px; width: calc(50% - 40px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .product:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
@@ -18,12 +18,16 @@
     </style>
 </head>
 <body>
-
-<a href="javascript:history.back()" class="back-button">Back</a>
+<div class="back-button">
+    <a href="index.html"><b>Home</b></a>
+    <a href="account.html"><b>Account</b></a>
+    <a href="contact.html"><b>Contact</b></a>
+    <a href="cart.html"><b>Shopping Cart</b></a>
+</div>
 
 <div class="header">
-    <h1>Welcome to Our Online Store</h1>
-    <p>Discover our best products and deals!</p>
+    <h1 style="color: rgb(0, 0, 0); font-weight: bold;">Welcome to Our Online Store</h1>
+    <p style="color: rgb(0, 0, 0); font-weight: bold;">Discover our best products and deals!</p>
 </div>
 
 <div class="product-grid">
