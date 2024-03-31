@@ -243,8 +243,6 @@ p {
     filter: grayscale(0);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
 .container-f {
     max-width: 1170px;
     margin: auto;

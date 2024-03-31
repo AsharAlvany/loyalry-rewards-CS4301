@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const UserPointsPage = () => {
+const App = () => {
   // Sample user data
   const initialUsers = [
     { id: 1, name: 'John', points: 100 },
@@ -10,85 +10,89 @@ const UserPointsPage = () => {
   const [users, setUsers] = useState(initialUsers);
   const [reload, setReload] = useState(true);
   const [inputVal, setInputVal] = useState();
+  const [cartItems, setCartItems] = useState([]);
 
-  function fetchUsers(){
-    return new Promise((resolve, reject) =>{
-      fetch(`http://localhost:3030/getUsers`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        resolve(data);
-      })
-      .catch((error)=>{
-        console.log(error)
-        reject(error)
-      })
-    })
+  async function fetchUsersWithPoints() {
+    try {
+      const response = await fetch(`http://localhost:3030/getUsers`);
+      if (!response.ok) {
+        throw new Error(`Error fetching users: ${response.statusText}`);
+      }
+      const userData = await response.json();
+      if (typeof userData !== 'object' || userData === null) {
+        throw new Error("Invalid JSON response from server");
+      }
+
+      const updatedUsers = await Promise.all(
+        userData.map(async (user) => {
+          const points = await fetchPoints(user.id);
+          return { ...user, points };
+        })
+      );
+      setUsers(updatedUsers);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      // Handle error gracefully in your component (e.g., display an error message)
+    }
   }
 
-  function fetchPoint(user){
-    return new Promise((resolve, reject) =>{
-      fetch(`http://localhost:3030/getPoints/${user}`)
-      .then((response) => response.json())
-      .then((data) => {
-        resolve(data);
-      })
-      .catch((error) =>{
-        console.log(error)
-        reject(error)
-      })
-    })
-  }
-
-  async function fetchPoints(users){
-    let pointDict = []
-    await Promise.all(
-      users.map(async (element) =>{
-        let object = {}
-        object["id"] = element;
-        object["name"] = element;
-        object["points"] = await fetchPoint(element);
-        pointDict.push(object);
-      })
-    )
-    console.log(pointDict)
-    return pointDict;
+  async function fetchPoints(userId) {
+    try {
+      const response = await fetch(`http://localhost:3030/getPoints/${userId}`);
+      if (!response.ok) {
+        throw new Error(`Error fetching points for user ${userId}`);
+      }
+      const points = await response.json();
+      return points;
+    } catch (error) {
+      console.error("Error fetching points:", error);
+      // Handle error gracefully in your component
+    }
   }
 
   useEffect(() => {
-    fetchUsers().then((users) =>{
-      return fetchPoints(users)
-    })
-    .then((points) =>{
-      setUsers(points)
-    })
+    fetchUsersWithPoints();
+  }, [reload]);
 
-  }, [reload])
-  
   const handleRedeemPoints = (userId, pointsToRedeem) => {
     fetch(`http://localhost:3030/redeemPoints/${userId}/${pointsToRedeem}`)
-    setTimeout(()=>{
-      setReload(!reload)
-    }, [500])
+      .then(() => setReload(!reload)); // Trigger refetch on success
   };
 
   const handleAwardPoints = (userId, pointsToAward) => {
     fetch(`http://localhost:3030/awardPoints/${userId}/${pointsToAward}`)
-    setTimeout(()=>{
-      setReload(!reload)
-    }, [500])
+      .then(() => setReload(!reload)); // Trigger refetch on success
   };
 
-  function handleKeyPress(e){
-    if (e.code == "Enter"){
-      fetch(`http://localhost:3030/createUser/${inputVal}`)
-      .then(()=>{
-        setInputVal("")
-        setTimeout(()=>{
-          setReload(!reload)
-        }, [500])
-      })
+  const handleCreateUser = async () => {
+    // Validate and sanitize user input before making the request
+    if (!inputVal) {
+      return; // Handle empty input
     }
-  }
+    const sanitizedInput = inputVal.trim(); // Basic sanitization example
+
+    try {
+      const response = await fetch(`http://localhost:3030/createUser/${sanitizedInput}`);
+      if (!response.ok) {
+        throw new Error(`Error creating user: ${response.statusText}`);
+      }
+      setInputVal(""); // Clear input field
+      setReload(!reload); // Trigger refetch on success
+    } catch (error) {
+      console.error("Error creating user:", error);
+      // Handle error gracefully in your component (e.g., display an error message)
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.code === "Enter") {
+      handleCreateUser();
+    }
+  };
+
+  const addToCart = (product) => {
+    setCartItems([...cartItems, product]);
+  };
 };
-export default UserPointsPage;
+
+export default App;
