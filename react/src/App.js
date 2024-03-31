@@ -90,43 +90,5 @@ const UserPointsPage = () => {
       })
     }
   }
-  
-  return (
-    <div>
-      <h1>User Points</h1>
-      <h2>Create User:</h2>
-      <input type='text' value={inputVal} onChange={(e) => {setInputVal(e.target.value)}} onKeyDown={(e) => handleKeyPress(e)}></input>
-      <br/>
-      <br/>
-      <br/>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Points</th>
-            <th>Redeem Points</th>
-            <th>Award Points</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map(user => (
-            <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.points}</td>
-              <td>
-                <button onClick={() => handleRedeemPoints(user.id, 10)}>Redeem 10 Points</button>
-                {/* You can customize the points to redeem */}
-              </td>
-              <td>
-                <button onClick={() => handleAwardPoints(user.id, 10)}>Award 10 Points</button>
-                {/* You can customize the points to award */}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
 };
-
 export default UserPointsPage;

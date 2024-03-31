@@ -10,11 +10,15 @@
   "license": "ISC",
   "dependencies": {
     "@nomiclabs/hardhat-waffle": "^2.0.6",
+    "@openzeppelin/contracts": "^5.0.2",
     "chai": "^4.4.1",
     "cors": "^2.8.5",
     "ethers": "^6.11.1",
     "express": "^4.18.3",
     "hardhat": "^2.21.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-error-boundary": "^4.0.13",
     "solidity": "^0.0.1"
   },
   "devDependencies": {

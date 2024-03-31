@@ -66,15 +66,63 @@
         var LoginForm = document.getElementById("LoginForm");
         var RegForm = document.getElementById("RegForm");
         var Indicator = document.getElementById("Indicator");
-        function register() {
+
+        async function register() {
             RegForm.style.transform = "translateX(0px)";
             LoginForm.style.transform = "translateX(0px)";
             Indicator.style.transform = "translateX(100px)";
         }
-        function login() {
+
+        async function login() {
             RegForm.style.transform = "translateX(300px)";
             LoginForm.style.transform = "translateX(300px)";
             Indicator.style.transform = "translateX(0px)";
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                if (response.ok) {
+                    // Handle successful login (e.g., redirect to user account page)
+                    console.log("Login successful!");
+                    // Handle successful login response (e.g., store token)
+                } else {
+                    // Handle login error (e.g., display error message)
+                    console.error("Login failed:", await response.text());
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        async function registerUser() {
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
+
+                if (response.ok) {
+                    // Handle successful registration (e.g., display success message)
+                    console.log("Registration successful!");
+                } else {
+                    // Handle registration error (e.g., display error message)
+                    console.error("Registration failed:", await response.text());
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
         }
     </script>
 </body>
