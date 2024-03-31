@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,21 +37,23 @@
                     <h3>Product 1</h3>
                     <p>Iphone 15</p>
                     <p>Price: $799.00</p>
-                    <button onclick="addToCart('product1', 'Iphone 15', '$799.00', 'iphone15.jpg')">Add to Cart</button>
+                    <button onclick="addToCart('product1', 'Iphone 15', 799.00, 'iphone15.jpg')">Add to Cart</button>
                 </div>
                 <div class="product">
                     <img src="LG-TV.jpg" alt="Product 2" width="150px" height="100px" />
                     <h3>Product 2</h3>
                     <p>LG webOS-6.0 TV </p>
                     <p>Price: $1490.00</p>
-                    <button onclick="addToCart('product2', 'LG webOS-6.0 TV', '$1490.00', 'LG-TV.jpg')">Add to Cart</button>
+                    <button onclick="addToCart('product2', 'LG webOS-6.0 TV', 1490.00, 'LG-TV.jpg')">Add to
+                        Cart</button>
                 </div>
                 <div class="product">
                     <img src="samsungS24.jpeg" alt="Product 3" width="100px" height="100px" />
                     <h3>Product 3</h3>
                     <p>Samsung S24</p>
                     <p>Price: $859.99</p>
-                    <button onclick="addToCart('product3', 'Samsung S24', '$859.99', 'samsungS24.jpg')">Add to Cart</button>
+                    <button onclick="addToCart('product3', 'Samsung S24', 859.99, 'samsungS24.jpeg')">Add to
+                        Cart</button>
                 </div>
                 <!-- Add more products here -->
             </div>
@@ -68,9 +71,13 @@
             }
         }
         function addToCart(id, name, price, image) {
-            // You can implement your add to cart logic here
-            console.log("Adding to cart: ", id, name, price, image);
-            // For example, you can store the item details in localStorage or send it to a server
+            var cartItem = { id: id, name: name, price: price, image: image };
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(cartItem); // Add new item to the existing cart array
+            localStorage.setItem('cart', JSON.stringify(cart));
+            // Show a confirmation message
+            alert('Product added to cart!');
+            //window.location.href = 'cart.html';
         }
     </script>
 </body>
