@@ -7,7 +7,7 @@
 body {
     font-family: 'poppins', sans-serif;
     line-height: 1.5;
-    background: #ffd6d6;
+    background: #cdfcff;
 }
 
 .navbar {
@@ -18,7 +18,7 @@ body {
     top: 0px;
     left: 0px;
     width: 100%;
-    background-color: #eceae9;
+    background-color: #fff387;
     z-index: 1009;
 }
 
@@ -96,7 +96,7 @@ p {
 }
 
 .header {
-    background: #ffd6d6;
+    background: #cdfcff;
 }
 
 .header .row {
@@ -170,7 +170,7 @@ p {
 }
 
 .offer {
-    background: #ffd6d6;
+    background: #cdfcff;
     margin-top: 80px;
     padding: 30px;
 }
@@ -496,7 +496,7 @@ td:last-child {
 /* -------account-page-------- */
 .account-page {
     padding: 50px 0;
-    background: #ffd6d6;
+    background: #cdfcff;
 }
 
 .form-container {

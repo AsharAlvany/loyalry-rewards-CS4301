@@ -70,15 +70,36 @@
                 MenuItems.style.maxHeight = "0px";
             }
         }
-        function addToCart(id, name, price, image) {
-            var cartItem = { id: id, name: name, price: price, image: image };
+        function updateCartCount() {
             var cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.push(cartItem); // Add new item to the existing cart array
+            var cartCount = cart.length;
+            var cartLink = document.querySelector('a[href="cart.html"]');
+            cartLink.innerHTML = 'Cart (' + cartCount + ')';
+            cartLink.style.fontWeight = 'bold';
+            // Highlight the cart link (you can add your desired styling here)
+            cartLink.style.color = 'red';
+        }
+
+        function addToCart(id, name, price, image) {
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            var existingItemIndex = cart.findIndex(item => item.id === id);
+            if (existingItemIndex !== -1) {
+                // If the item already exists in the cart, update its quantity
+                cart[existingItemIndex].quantity = (cart[existingItemIndex].quantity || 1) + 1;
+            } else {
+                // If the item is not already in the cart, add it as a new item
+                var cartItem = { id: id, name: name, price: price, image: image, quantity: 1 };
+                cart.push(cartItem);
+            }
             localStorage.setItem('cart', JSON.stringify(cart));
-            // Show a confirmation message
-            alert('Product added to cart!');
+            // Update cart count and style
+            updateCartCount();
             //window.location.href = 'cart.html';
         }
+
+        // Call the updateCartCount function when the page loads to ensure the cart count is up-to-date
+        window.onload = updateCartCount;
     </script>
 </body>
+
 </html>

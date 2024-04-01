@@ -111,16 +111,26 @@
             }
         }
 
+        function updateCartCount() {
+        var cartCount = cartItems.length;
+        var cartLink = document.querySelector('a[href="cart.html"]');
+        cartLink.innerHTML = 'Cart (' + cartCount + ')';
+        cartLink.style.fontWeight = 'bold';
+        // Highlight the cart link (you can add your desired styling here)
+        cartLink.style.color = 'red';
+    }
         function removeItem(id) {
             var updatedCartItems = cartItems.filter(item => item.id !== id);
             localStorage.setItem('cart', JSON.stringify(updatedCartItems));
             cartItems = updatedCartItems; // Update the cartItems variable to reflect the changes
             updateCartDisplay(); // Refresh the display to reflect the changes
+            updateCartCount();
         }
 
         // Initial display update
         document.addEventListener('DOMContentLoaded', function() {
             updateCartDisplay();
+            updateCartCount();
         });
     </script>
 </body>
