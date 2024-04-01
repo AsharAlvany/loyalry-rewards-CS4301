@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
-
 <body>
     <div class="shopping-cart">
         <div class="navbar">
@@ -48,6 +43,9 @@
                     <tbody id="cartItemsContainer">
                     </tbody>
                 </table>
+                <div class="total-cost-container">
+                    <h3>Total Cost: <span id="totalCost">0</span></h3>
+                </div>
                 <p id="emptyCartMessage">Your cart is currently empty.</p>
                 <a href="#" class="btn" onclick="checkout()">Checkout Now</a>
                 <a href="#" class="btn" id="applyPointsBtn">Redeem Points</a>
@@ -66,49 +64,63 @@
             }
         }
 
-        // Fetch cart items from localStorage and display them
         var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
         var cartItemsContainer = document.getElementById('cartItemsContainer');
         var emptyCartMessage = document.getElementById('emptyCartMessage');
+        var totalCostElement = document.getElementById('totalCost');
 
-        //This below line of code can be written below <td>$item.name</td> line.
-        //<td id="price_${item.id}">${parseFloat(item.price).toFixed(2)}</td>
-        //Here we are displaying direct total price so commented out for now
+        function updateCartDisplay() {
+            cartItemsContainer.innerHTML = ''; // Clear the current items
+            let totalCost = 0;
 
-        if (cartItems.length > 0) {
             cartItems.forEach(item => {
                 var row = document.createElement('tr');
                 row.innerHTML = `
-        <td>${item.name}</td>
-        <td><img src="${item.image}" width="50px" height="50px" alt="${item.name} Image"></td>
-        <td><input type="number" min="1" value="1" onchange="updateQuantity('${item.id}', this.value)"></td>
-        <td id="totalPrice_${item.id}">${parseFloat(item.price).toFixed(2)}</td>
-        <td><button onclick="removeItem('${item.id}')">Remove</button></td>
-        `;
+                    <td>${item.name}</td>
+                    <td><img src="${item.image}" width="50px" height="50px" alt="${item.name} Image"></td>
+                    <td><input type="number" min="1" value="1" onchange="updateQuantity('${item.id}', this.value)"></td>
+                    <td id="totalPrice_${item.id}">${parseFloat(item.price).toFixed(2)}</td>
+                    <td><button onclick="removeItem('${item.id}')">Remove</button></td>
+                `;
                 cartItemsContainer.appendChild(row);
+
+                // Calculate total cost
+                totalCost += parseFloat(item.price);
             });
-            emptyCartMessage.style.display = 'none'; // Hide empty cart message
+
+            // Update total cost display
+            totalCostElement.textContent = totalCost.toFixed(2);
+
+            // Toggle the display based on cart contents
+            if (cartItems.length > 0) {
+                emptyCartMessage.style.display = 'none';
+            } else {
+                emptyCartMessage.style.display = 'block';
+            }
         }
 
         function updateQuantity(id, quantity) {
             var item = cartItems.find(item => item.id === id);
             var price = parseFloat(item.price);
-            if (!isNaN(price)) {
+            if (!isNaN(price) && !isNaN(quantity)) {
                 var total = price * parseInt(quantity);
                 document.getElementById(`totalPrice_${id}`).textContent = total.toFixed(2);
+                // Recalculate the total cost since quantity has changed
+                updateCartDisplay();
             } else {
-                alert("Price is not a valid number");
+                alert("Price or quantity is not a valid number");
             }
         }
 
         function removeItem(id) {
-            // Implement remove item logic here
             var updatedCartItems = cartItems.filter(item => item.id !== id);
             localStorage.setItem('cart', JSON.stringify(updatedCartItems));
-            location.reload(); // Refresh the page to reflect the changes
+            cartItems = updatedCartItems; // Update the cartItems variable to reflect the changes
+            updateCartDisplay(); // Refresh the display to reflect the changes
         }
+
+        // Initial display update
+        updateCartDisplay();
     </script>
-
 </body>
-
 </html>
