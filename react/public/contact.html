@@ -1,26 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product Detials</title>
+    <title>Contact Us</title>
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
         }
-
         /* Style inputs */
-        input[type=text],
-        select,
-        textarea {
+        input[type=text], input[type=email], textarea {
             width: 100%;
             padding: 12px;
             border: 1px solid #ccc;
@@ -28,7 +21,6 @@
             margin-bottom: 16px;
             resize: vertical;
         }
-
         input[type=submit] {
             background-color: #ff523b;
             color: white;
@@ -36,32 +28,26 @@
             border: none;
             cursor: pointer;
         }
-
         input[type=submit]:hover {
             background-color: #dadada;
             color: #ff523b;
         }
-
-        /* Create two columns that float next to eachother */
+        /* Create two columns that float next to each other */
         .column {
             float: left;
             width: 50%;
             margin-top: 6px;
             padding: 20px;
         }
-
         /* Clear floats after the columns */
         .row:after {
             content: "";
             display: table;
             clear: both;
         }
-
         /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
         @media screen and (max-width: 600px) {
-
-            .column,
-            input[type=submit] {
+            .column, input[type=submit] {
                 width: 100%;
                 margin-top: 0;
                 text-align: left;
@@ -69,12 +55,11 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <a href="index.html"> <img src="images/logo.png" width="125px" /></a>
+                <a href="index.html"> <img src="logo.webp" width="100px" /></a>
             </div>
             <nav>
                 <ul id="MenuItems">
@@ -82,7 +67,7 @@
                     <li><a href="product.html" style="color: #000000; font-weight: bold;">Products</a></li>
                     <li><a href="account.html" style="color: #000000; font-weight: bold;">Account</a></li>
                     <li><a href="contact.html" style="color: #000000; font-weight: bold;">Contact</a></li>
-                    <li><a href="cart.html"><img src="cart.jpg" width="30px" height="30px"></a></li>
+                    <li><a href="cart.html" style="color: #000000; font-weight: bold;">Cart</a></li>
                 </ul>
             </nav>
         </div>
@@ -91,33 +76,27 @@
     <div class="account-page">
         <div class="container">
             <div style="text-align:center">
-                <h2>Contact Us</h2>
+                <h2 style="margin-top: 30px;">Contact Us</h2>
                 <p>You can ask anything related to our shop.</p>
             </div>
             <div class="row">
                 <div class="column">
-                    <form action="/action_page.php">
+                    <form action="/submit_form.php" method="post">
                         <label for="fname">Name</label>
-                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
-                        <label for="lname">Number</label>
-                        <input type="number" id="lname" name="lastname" placeholder="Your Contact Number..">
-                        <label for="country">Reason</label>
-                        <select id="country" name="country">
-                            <option value="australia">Buy</option>
-                            <option value="australia">Sell</option>
-                            <option value="canada">Promotion</option>
-                            <option value="usa">Order</option>
-                        </select>
+                        <input type="text" id="fname" name="firstname" placeholder="Your name.." required>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your email.." required>
                         <label for="subject">Subject</label>
-                        <textarea id="subject" name="subject" placeholder="Write something.."
-                            style="height: 170px"></textarea>
+                        <textarea id="subject" name="subject" placeholder="Write something.." style="height: 170px" required></textarea>
                         <input type="submit" value="Submit">
                     </form>
                 </div>
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1479.7952241782089!2d75.22774797176085!3d24.285644653096945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3965cf10ccc7477d%3A0x70df7a13dabfc566!2sChoudhary%20kirana%20store!5e1!3m2!1sen!2sin!4v1649331028213!5m2!1sen!2sin"
-                    width="600" height="450" style="border: 10;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="column">
+                    <h2>Contact Information</h2>
+                    <p><strong>Address:</strong> 123 Main Street, Cityville</p>
+                    <p><strong>Email:</strong> info@example.com</p>
+                    <p><strong>Phone:</strong> +1 234 567 890</p>
+                </div>
             </div>
         </div>
     </div>
@@ -126,7 +105,6 @@
         var MenuItems = document.getElementById("MenuItems");
         var MenuItem = document.getElementById("inneritems");
         MenuItems.style.maxHeight = "0px";
-
         function menutoggle() {
             if (MenuItems.style.maxHeight == "0px") {
                 MenuItems.style.maxHeight = "200px";
@@ -134,7 +112,6 @@
             else {
                 MenuItems.style.maxHeight = "0px";
             }
-
         }
         function menutoggl() {
             if (MenuItem.style.display == "block") {
@@ -143,11 +120,7 @@
             else {
                 MenuItem.style.display = "block";
             }
-
         }
     </script>
-
-
 </body>
-
 </html>

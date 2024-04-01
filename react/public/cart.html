@@ -14,7 +14,7 @@
         <div class="navbar">
             <div class="logo">
                 <a href="index.html">
-                    <img src="logo.webp" width="70px" />
+                    <a href="index.html"> <img src="logo.webp" width="100px" /></a>
                 </a>
             </div>
             <nav>
@@ -23,13 +23,13 @@
                     <li><a href="product.html" style="color: #000000; font-weight: bold;">Products</a></li>
                     <li><a href="account.html" style="color: #000000; font-weight: bold;">Account</a></li>
                     <li><a href="contact.html" style="color: #000000; font-weight: bold;">Contact</a></li>
-                    <li><a href="cart.html"><img src="cart.jpg" width="30px" height="30px"></a></li>
+                    <li><a href="cart.html" style="color: #000000; font-weight: bold;">Cart</a></li>
                 </ul>
             </nav>
         </div>
         <div class="account-page">
             <div class="small-container cart-page">
-                <h2 style="margin-top: -80px;">Shopping Cart</h2>
+                <h2 style="margin-top: -70px;">Shopping Cart</h2>
                 <table>
                     <thead>
                         <tr>
@@ -78,14 +78,14 @@
                 row.innerHTML = `
                     <td>${item.name}</td>
                     <td><img src="${item.image}" width="50px" height="50px" alt="${item.name} Image"></td>
-                    <td><input type="number" min="1" value="1" onchange="updateQuantity('${item.id}', this.value)"></td>
-                    <td id="totalPrice_${item.id}">${parseFloat(item.price).toFixed(2)}</td>
+                    <td><input type="number" min="1" value="${item.quantity || 1}" onchange="updateQuantity('${item.id}', this.value)"></td>
+                    <td id="totalPrice_${item.id}">${(parseFloat(item.price) * (item.quantity || 1)).toFixed(2)}</td>
                     <td><button onclick="removeItem('${item.id}')">Remove</button></td>
                 `;
                 cartItemsContainer.appendChild(row);
 
-                // Calculate total cost
-                totalCost += parseFloat(item.price);
+                // Calculate total cost including quantity
+                totalCost += parseFloat(item.price) * (item.quantity || 1);
             });
 
             // Update total cost display
@@ -101,14 +101,13 @@
 
         function updateQuantity(id, quantity) {
             var item = cartItems.find(item => item.id === id);
-            var price = parseFloat(item.price);
-            if (!isNaN(price) && !isNaN(quantity)) {
-                var total = price * parseInt(quantity);
-                document.getElementById(`totalPrice_${id}`).textContent = total.toFixed(2);
-                // Recalculate the total cost since quantity has changed
-                updateCartDisplay();
+            if (item && !isNaN(quantity)) {
+                // Update the item's quantity in the cart array
+                item.quantity = parseInt(quantity);
+                localStorage.setItem('cart', JSON.stringify(cartItems)); // Update cart in localStorage
+                updateCartDisplay(); // Recalculate and display with updated quantities
             } else {
-                alert("Price or quantity is not a valid number");
+                alert("Quantity is not a valid number");
             }
         }
 
@@ -120,7 +119,9 @@
         }
 
         // Initial display update
-        updateCartDisplay();
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartDisplay();
+        });
     </script>
 </body>
 </html>
