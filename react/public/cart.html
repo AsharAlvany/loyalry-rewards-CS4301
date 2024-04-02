@@ -20,7 +20,7 @@
             <nav>
                 <ul id="MenuItems">
                     <li><a href="index.html" style="color: #000000; font-weight: bold;">Home</a></li>
-                    <li><a href="product.html" style="color: #000000; font-weight: bold;">Products</a></li>
+                    <li><a href="product.html" style="color: #000000; font-weight: bold;">Electronics Products</a></li>
                     <li><a href="account.html" style="color: #000000; font-weight: bold;">Account</a></li>
                     <li><a href="contact.html" style="color: #000000; font-weight: bold;">Contact</a></li>
                     <li><a href="cart.html" style="color: #000000; font-weight: bold;">Cart</a></li>
@@ -44,11 +44,21 @@
                     </tbody>
                 </table>
                 <div class="total-cost-container">
-                    <h3>Total Cost: <span id="totalCost">0</span></h3>
+                    <h3>Sub Total: $<span id="subTotal">0.0</span></h3>
+                </div>
+                <div id="savingsContainer">
+                    <h3>Savings Applied: $<span id="savingsAmount">0.0</span></h3>
+                </div>
+                <div>
+                    <h3>Total Cost: $<span id="totalCost">0.0</span></h3>
                 </div>
                 <p id="emptyCartMessage">Your cart is currently empty.</p>
                 <a href="#" class="btn" onclick="checkout()">Checkout Now</a>
-                <a href="#" class="btn" id="applyPointsBtn">Redeem Points</a>
+                <div>
+                    <input type="checkbox" id="usePointsCheckbox">
+                    <label for="usePointsCheckbox">Redeem Points (You have <span id="userPoints">0</span> points available)</label>
+                </div>
+                <h3 id="potentialSavingsMessage">You will save potentially $<span id="potentialSavings">0.0</span> if you purchase today! (5% off on each product)</h3>
             </div>
         </div>
     </div>
@@ -67,37 +77,48 @@
         var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
         var cartItemsContainer = document.getElementById('cartItemsContainer');
         var emptyCartMessage = document.getElementById('emptyCartMessage');
-        var totalCostElement = document.getElementById('totalCost');
+        var subTotalElement = document.getElementById('subTotal');
 
         function updateCartDisplay() {
-            cartItemsContainer.innerHTML = ''; // Clear the current items
-            let totalCost = 0;
+    cartItemsContainer.innerHTML = ''; // Clear the current items
+    let subTotal = 0;
+    let totalSavings = 0;
+    const discount = 0.05;  // Discount percentage (5%)
 
-            cartItems.forEach(item => {
-                var row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${item.name}</td>
-                    <td><img src="${item.image}" width="50px" height="50px" alt="${item.name} Image"></td>
-                    <td><input type="number" min="1" value="${item.quantity || 1}" onchange="updateQuantity('${item.id}', this.value)"></td>
-                    <td id="totalPrice_${item.id}">${(parseFloat(item.price) * (item.quantity || 1)).toFixed(2)}</td>
-                    <td><button onclick="removeItem('${item.id}')">Remove</button></td>
-                `;
-                cartItemsContainer.appendChild(row);
+    cartItems.forEach(item => {
+        const potentialSavings = parseFloat(item.price) * discount * (item.quantity || 1);
+        totalSavings += potentialSavings;
+        var row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td><img src="${item.image}" width="50px" height="50px" alt="${item.name} Image"></td>
+            <td><input type="number" min="1" value="${item.quantity || 1}" onchange="updateQuantity('${item.id}', this.value)"></td>
+            <td id="subtotalCost_${item.id}">$${(parseFloat(item.price) * (item.quantity || 1)).toFixed(2)}</td>
+            <td><button onclick="removeItem('${item.id}')">Remove</button></td>
+        `;
+        cartItemsContainer.appendChild(row);
 
-                // Calculate total cost including quantity
-                totalCost += parseFloat(item.price) * (item.quantity || 1);
-            });
+        // Calculate total cost including quantity
+        subTotal += parseFloat(item.price) * (item.quantity || 1);
+    });
 
-            // Update total cost display
-            totalCostElement.textContent = totalCost.toFixed(2);
+    // Update subtotal and potential savings display (existing code)
+    subTotalElement.textContent = subTotal.toFixed(2);
+    const potentialSavingsElement = document.getElementById('potentialSavings');
+    potentialSavingsElement.textContent = totalSavings.toFixed(2);
+    
+    // Update savings message visibility
+    const savingsMessage = document.getElementById('potentialSavingsMessage');
+    savingsMessage.style.display = 'block'; // displays msg always
 
-            // Toggle the display based on cart contents
-            if (cartItems.length > 0) {
-                emptyCartMessage.style.display = 'none';
-            } else {
-                emptyCartMessage.style.display = 'block';
-            }
-        }
+    // Toggle the display based on cart contents
+    if (cartItems.length > 0) {
+        emptyCartMessage.style.display = 'none';
+    } else {
+        emptyCartMessage.style.display = 'block';
+    }
+}
+
 
         function updateQuantity(id, quantity) {
             var item = cartItems.find(item => item.id === id);

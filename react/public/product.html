@@ -24,36 +24,97 @@
                 <nav>
                     <ul id="MenuItems">
                         <li><a href="index.html" style="color: #000000; font-weight: bold;">Home</a></li>
-                        <li><a href="product.html" style="color: #000000; font-weight: bold;">Products</a></li>
+                        <li><a href="product.html" style="color: #000000; font-weight: bold;">Electronics Products</a></li>
                         <li><a href="account.html" style="color: #000000; font-weight: bold;">Account</a></li>
                         <li><a href="contact.html" style="color: #000000; font-weight: bold;">Contact</a></li>
                         <li><a href="cart.html" style="color: #000000; font-weight: bold;">Cart</a></li>
                     </ul>
                 </nav>
             </div>
-            <div class="row" style="margin-top: 100px;">
-                <div class="product">
-                    <img src="iphone15.jpg" alt="Product 1" width="100px" height="100px" />
+            <div class="row" style="margin-top: 0px;">
+                <div class="product-container">
+                    <img src="iphone15.jpg" alt="Product 1" width="200px" height="200px" />
                     <h3>Product 1</h3>
-                    <p>Iphone 15</p>
-                    <p>Price: $799.00</p>
+                    <p style="color: #000000;"><b>Iphone 15</b></p>
+                    <p style="color: #000000;"><b>Price: $799.00</b></p>
                     <button onclick="addToCart('product1', 'Iphone 15', 799.00, 'iphone15.jpg')">Add to Cart</button>
                 </div>
-                <div class="product">
-                    <img src="LG-TV.jpg" alt="Product 2" width="150px" height="100px" />
+                <div class="product-container">
+                    <img src="LG-TV.jpg" alt="Product 2" width="300px" height="200px" />
                     <h3>Product 2</h3>
-                    <p>LG webOS-6.0 TV </p>
-                    <p>Price: $1490.00</p>
-                    <button onclick="addToCart('product2', 'LG webOS-6.0 TV', 1490.00, 'LG-TV.jpg')">Add to
-                        Cart</button>
+                    <p style="color: #000000;"><b>LG webOS-6.0 TV</b></p>
+                    <p style="color: #000000;"><b>Price: $1490.00</b></p>
+                    <button onclick="addToCart('product2', 'LG webOS-6.0 TV', 1490.00, 'LG-TV.jpg')">Add to Cart</button>
                 </div>
-                <div class="product">
-                    <img src="samsungS24.jpeg" alt="Product 3" width="100px" height="100px" />
+                <div class="product-container">
+                    <img src="samsungS24.jpeg" alt="Product 3" width="200px" height="200px" />
                     <h3>Product 3</h3>
-                    <p>Samsung S24</p>
-                    <p>Price: $859.99</p>
-                    <button onclick="addToCart('product3', 'Samsung S24', 859.99, 'samsungS24.jpeg')">Add to
-                        Cart</button>
+                    <p style="color: #000000;"><b>Samsung S24</b></p>
+                    <p style="color: #000000;"><b>Price: $859.99</b></p>
+                    <button onclick="addToCart('product3', 'Samsung S24', 859.99, 'samsungS24.jpeg')">Add to Cart</button>
+                </div>
+                <div class="product-container">
+                    <img src="sonyWH1000XM5.jpg" alt="Sony Noise Cancelling Headphones" width="200px" height="200px" />
+                    <h3>Product 4</h3>
+                    <p style="color: #000000;"><b>Sony WH-1000XM5 Noise Cancelling Headphones</b></p>
+                    <p style="color: #000000;"><b>Price: $429.99 (on sale from $499.99)</b></p>
+                    <button onclick="addToCart('product4', 'Sony WH-1000XM5 Noise Cancelling Headphones', 429.99, 'sonyWH1000XM5.jpg')">Add to Cart</button>
+                </div>
+                <div class="product-container">
+                    <img src="gamingPC.jpg" alt="Gaming PC" width="350px" height="200px" />
+                    <h3>Product 5</h3>
+                    <p style="color: #000000;"><b>Custom Gaming PC</b></p>
+                    <p style="color: #000000;"><b>Price: $1,299.99</b></p>
+                    <button onclick="addToCart('product5', 'Custom Gaming PC', 1299.99, 'gamingPC.jpg')">Add to Cart</button>
+                </div>
+                <div class="product-container">
+                    <img src="smartTV.jpg" alt="LG 77 inch Smart TV" width="350px" height="200px" />
+                    <h3>Product 6</h3>
+                    <p style="color: #000000;"><b>LG 77 inch Smart TV</b></p>
+                    <p style="color: #000000;"><b>Price: $1,799.99</b></p>
+                    <button onclick="addToCart('product6', 'LG 77 inch Smart TV', 1799.99, 'smartTV.jpg')">Add to Cart</button>
+                </div>
+                <div class="product-container">
+                    <img src="appleWatchSeries8.jpg" alt="Apple Watch Series 8 (GPS + Cellular)" width="250px" height="250px" />
+                    <h3>Product 7</h3>
+                    <p style="color: #000000;"><b>Apple Watch Series 8 (GPS + Cellular)</b></p>
+                    <p style="color: #000000;"><b>Price: $429.00</b></p>
+                    <button onclick="addToCart('product7', 'Apple Watch Series 8 (GPS + Cellular)', 429.00, 'appleWatchSeries8.jpg')">Add to Cart</button>
+                </div>
+                <div class="product-container">
+                    <img src="PlayStation5.jpg" alt="Sony PlayStation 5 Digital Edition" width="350px" height="250px" />
+                    <h3>Product 8</h3>
+                    <p style="color: #000000;"><b>Sony PlayStation 5 Digital Edition</b></p>
+                    <p style="color: #000000;"><b>Price: $399.99</b></p>
+                    <button onclick="addToCart('product8', 'Sony PlayStation 5 Digital Edition', 399.99, 'ps5Digital.jpg')">Add to Cart</button>
+                </div>
+                <div class="product-container">
+                    <img src="galaxyZFold4.jpg" alt="Samsung Galaxy Z Fold 4" width="350px" height="250px" />
+                    <h3>Product 9</h3>
+                    <p style="color: #000000;"><b>Samsung Galaxy Z Fold 4</b></p>
+                    <p style="color: #000000;"><b>Price: $1,799.99</b></p>
+                    <button onclick="addToCart('product9', 'Samsung Galaxy Z Fold 4', 1799.99, 'galaxyZFold4.jpg')">Add to Cart</button>
+                </div>
+                <div class="product-container">
+                    <img src="InstantPot.jpg" alt="Instant Pot 10-Quart Pressure Cooker" width="350px" height="250px" />
+                    <h3>Product 10</h3>
+                    <p style="color: #000000;"><b>Instant Pot Pro Plus 10-Quart Pressure Cooker</b></p>
+                    <p style="color: #000000;"><b>Price: $129.99</b></p>
+                    <button onclick="addToCart('product10', 'Instant Pot Pro Plus 10-Quart Pressure Cooker', 129.99, 'instantPotProPlus.jpg')">Add to Cart</button>
+                </div>
+                <div class="product-container">
+                    <img src="macbookPro.jpg" alt="Apple MacBook Pro 16-inch" width="350px" height="250px" />
+                    <h3>Product 13</h3>
+                    <p style="color: #000000;"><b>Apple MacBook Pro 16-inch</b></p>
+                    <p style="color: #000000;"><b>Price: $2,399.00</b></p>
+                    <button onclick="addToCart('product13', 'Apple MacBook Pro 16-inch', 2399.00, 'macbookPro.jpg')">Add to Cart</button>
+                </div>
+                <div class="product-container">
+                    <img src="dellXPS.jpg" alt="Dell XPS 13" width="350px" height="250px" />
+                    <h3>Product 14</h3>
+                    <p style="color: #000000;"><b>Dell XPS 13</b></p>
+                    <p style="color: #000000;"><b>Price: $1,199.99</b></p>
+                    <button onclick="addToCart('product14', 'Dell XPS 13', 1199.99, 'dellXPS.jpg')">Add to Cart</button>
                 </div>
                 <!-- Add more products here -->
             </div>

@@ -352,6 +352,13 @@ ul {
 }
 
 /*=--------- all products ---------*/
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust width as needed */
+    grid-gap: 0px; /* Adjust spacing between products */
+    margin: 100px auto 20px;
+}
+
 .row-2 {
     justify-content: space-between;
     margin: 100px auto 50px;
