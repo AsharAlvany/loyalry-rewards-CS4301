@@ -2,11 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Test from './Test';
 import reportWebVitals from './reportWebVitals';
+import { MetaMaskProvider } from "@metamask/sdk-react";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <App />
+  <MetaMaskProvider
+      debug={false}
+      sdkOptions={{
+          dappMetadata: {
+              name: "Example React Dapp",
+              url: window.location.href,
+          },
+      }}
+  >
+      <Test />
+  </MetaMaskProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
