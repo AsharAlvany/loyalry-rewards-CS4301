@@ -12,9 +12,11 @@ function NavBar(props) {
       <ul id="MenuItems">
         <li><a href="/" style={{ color: '#000000', fontWeight: 'bold' }}>Home</a></li>
         <li><a href="/" style={{ color: '#000000', fontWeight: 'bold' }}>Electronics Products</a></li>
-        <li><a href="/" style={{ color: '#000000', fontWeight: 'bold' }}>Account</a></li>
+        <li><a href="/" style={{ color: '#000000', fontWeight: 'bold' }} onClick={()=>{
+          localStorage.removeItem('cart');
+        }}>Account</a></li>
         <li><a href="/" style={{ color: '#000000', fontWeight: 'bold' }}>Contact</a></li>
-        <li><a href="cart.html" style={{ color: '#000000', fontWeight: 'bold' }}>Cart ({props.cartCount})</a></li>
+        <li><a href="ShoppingCart" style={{ color: '#000000', fontWeight: 'bold' }}>Cart ({props.cartCount})</a></li>
       </ul>
     </nav>
   </div>

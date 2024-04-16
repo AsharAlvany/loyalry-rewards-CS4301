@@ -117,8 +117,8 @@ app.get("/redeemPoints/:user/:points", async function(req, res){
     }
 })
 app.get("/createUser/:user", async function(req, res){
+    console.log(req.params.user);
     createUser(req.params.user).then((response) => {
-        // console.log();
         res.send(response);
     }).catch(()=>{
         // console.log(err);

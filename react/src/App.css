@@ -79,7 +79,7 @@ p {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .col-2 {
@@ -103,7 +103,17 @@ p {
   background: #ff523b;
   color: white;
   padding: 8px 30px;
-  margin: 30px 0;
+  /* margin: 30px 1.5rem 30px 0; */
+  border-radius: 30px;
+  transition: background 0.5s;
+}
+
+.dis-btn {
+  display: inline-block;
+  background: #dadada;
+  color: white;
+  padding: 8px 30px;
+  margin: 30px 1.5rem 30px 1.5rem;
   border-radius: 30px;
   transition: background 0.5s;
 }
@@ -371,9 +381,12 @@ ul {
 /*=--------- all products ---------*/
 .product-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust width as needed */
+  grid-template-columns: repeat(auto-fit, 1fr); /* Adjust width as needed */
   grid-gap: 0px; /* Adjust spacing between products */
   margin: 100px auto 20px;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .row-2 {
@@ -460,7 +473,7 @@ input:focus {
 
 /* ------cart items------ */
 .cart-page {
-  margin: 80px auto;
+  margin: 0 auto;
 }
 
 table {
@@ -474,15 +487,25 @@ table {
 }
 
 th {
-  text-align: left;
   padding: 5px;
   color: #fff;
   background: #ff523b;
   font-weight: normal;
+  flex: 1;
 }
 
+tr{
+  display:flex;
+  align-items: center;
+  flex-direction: row;
+  flex: 1;
+}
 td {
-  padding: 10px 5px;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
 }
 
 td input {
@@ -569,7 +592,6 @@ form .btn {
   width: 100%;
   border: none;
   cursor: pointer;
-  margin: 10px 0;
 }
 
 form .btn:focus {
@@ -587,7 +609,10 @@ form .btn:focus {
 form a {
   font-size: 12px;
 }
-
+.shopping-cart{
+  width:100%;
+  height: fit-content;
+}
 #Indicator {
   width: 100px;
   border: none;
@@ -656,4 +681,4 @@ form a {
   .cart-info p {
       display: none;
   }
-}
+} 

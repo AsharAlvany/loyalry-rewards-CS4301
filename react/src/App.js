@@ -65,7 +65,7 @@ const UserPointsPage = () => {
     }, [500])
   };
   
-  const handleAwardPoints = (userId, pointsToAward) => {
+  const wardPoints = (userId, pointsToAward) => {
     fetch(`http://localhost:3030/awardPoints/${userId}/${pointsToAward}`)
     setTimeout(()=>{
       setReload(!reload)
