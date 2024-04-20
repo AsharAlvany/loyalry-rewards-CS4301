@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import logo from'../src/logo.png'
 
 function NavBar(props) {
 
   return (
     <div className="navbar">
     <div className="logo">
-      <a href="index.html"> <img src="logo.webp" alt="Logo" width="100px" /></a>
+      <a href="/"> <img src={logo} alt="Logo" width="100px" /></a>
     </div>
     <nav>
       <ul id="MenuItems">
