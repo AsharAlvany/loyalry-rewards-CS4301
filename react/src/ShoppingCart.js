@@ -161,8 +161,11 @@ function ShoppingCart(props) {
         alert(`Successfully checked out. Redeemed ${savings} points from ${activeUser}. Redirecting to Home page...`);
       }
       else if (activeUser.length > 0){
-        awardPoints(activeUser.toLowerCase(), subTotal)
-        alert(`Successfully checked out. Awarded ${activeUser} ${subTotal} points. Redirecting to Home page...`);
+        awardPoints(activeUser.toLowerCase(), (subTotal * 0.05).toFixed(2))
+        alert(`Successfully checked out. Awarded ${activeUser} ${(subTotal * 0.05).toFixed(2)} points. Redirecting to Home page...`);
+      }
+      else{
+        alert('Successfully checked out as guest!')
       }
       window.location.href = '/'
     }
@@ -242,7 +245,7 @@ function ShoppingCart(props) {
             <tbody id="cartItemsContainer"></tbody>
           </table>
           <div className="total-cost-container mt-10">
-            <h3>Sub Total: ${subTotal}</h3>
+            <h3>Sub Total: ${subTotal.toFixed(2)}</h3>
           </div>
           <div  className="my-5" id="savingsContainer">
             <h3>Savings Applied: ${savings.toFixed(2)}</h3>
